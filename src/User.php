@@ -1,6 +1,7 @@
 <?php
 
-class User{
+class User
+{
     /**
      * @var string
      */
@@ -14,7 +15,8 @@ class User{
     /**
      * @return string
      */
-    public function getFullName(){
+    public function getFullName()
+    {
         return trim($this->first_name . ' ' . $this->surname);
     }
 }

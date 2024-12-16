@@ -3,31 +3,34 @@
 use PHPUnit\Framework\TestCase;
 
 class QueueTest extends TestCase{
+    protected $queue;
+
+    protected function setUp(): void
+    {
+        $this->queue = new Queue;
+    }
+
+    protected function tearDown(): void
+    {
+        unset($this->queue);
+    }
+
     public function testNewQueueIsEmpty(){
-        $queue = new Queue;
 
-        $this->assertEquals(0, $queue->getCount());
-
-        return $queue;
+        $this->assertEquals(0, $this->queue->getCount());
     }
 
-    /**
-     * @depends testNewQueueIsEmpty
-     */
-    public function testAnItemIsAddedToTheQueue(Queue $queue){
-        $queue->push('green');
+    public function testAnItemIsAddedToTheQueue(){
+        $this->queue->push('green');
 
-        $this->assertEquals(1, $queue->getCount());
-
-        return $queue;
+        $this->assertEquals(1, $this->queue->getCount());
     }
 
-    /**
-     * @depends testAnItemIsAddedToTheQueue
-     */
-    public function testAnItemIsRemovedFromTheQueue(Queue $queue){
-        $item = $queue->pop();
+    public function testAnItemIsRemovedFromTheQueue(){
+        $this->queue->push('green');
+        $item = $this->queue->pop();
 
+        $this->assertEquals(0, $this->queue->getCount());
         $this->assertEquals('green', $item);
     }
 }
